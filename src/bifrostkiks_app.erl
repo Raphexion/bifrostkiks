@@ -15,6 +15,8 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+    application:ensure_all_started(kiks),
+    application:ensure_all_started(bifrost),
     bifrostkiks_sup:start_link().
 
 %%--------------------------------------------------------------------

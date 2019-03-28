@@ -28,7 +28,15 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-    {ok, { {one_for_all, 0, 1}, []} }.
+    FileProducer = #{id => file_producer,
+		     start => {file_producer, start_link, []}},
+
+    Bifrost = #{id => bifrost,
+		start => {bifrost, start_link, [ftp_memory_server_producer,
+						[{port, 2121}]]}},
+    Children = [FileProducer, Bifrost],
+
+    {ok, { {one_for_all, 1, 1}, Children} }.
 
 %%====================================================================
 %% Internal functions

@@ -5,7 +5,8 @@
   {mod, { bifrostkiks_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    kiks
    ]},
   {env,[]},
   {modules, []},
